@@ -27,7 +27,7 @@ func playerListAdd(player *Player) error {
 }
 
 func playerListDelete(player *Player) error {
-	index := playerListGetIndex(player)
+	index := playerListGetIndex(player.DiscordID)
 	if index == -1 {
 		return errors.New("player is not in the list")
 	}
@@ -37,9 +37,9 @@ func playerListDelete(player *Player) error {
 	return err
 }
 
-func playerListGetIndex(player *Player) int {
+func playerListGetIndex(discordID string) int {
 	for i, p := range playerList {
-		if p.DiscordID == player.DiscordID {
+		if p.DiscordID == discordID {
 			return i
 		}
 	}
