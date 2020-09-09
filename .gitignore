@@ -7,6 +7,9 @@ database.sqlite3
 # The compiled binary
 among-us-bot
 
+# Logs
+logs
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
