@@ -147,11 +147,11 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 		}
 		msg += "\n"
 
-		imposterWinRate := float64(player.Stats.ImposterWins) / float64(player.Stats.NumImposterGames) * 100
-		imposterWinRateString := fmt.Sprintf("%.2f", imposterWinRate)
-		msg += "- Imposter wins: " + strconv.Itoa(player.Stats.ImposterWins) + " / " + strconv.Itoa(player.Stats.NumImposterGames) + " "
-		if player.Stats.NumImposterGames > 0 {
-			msg += "(" + imposterWinRateString + "%)"
+		impostorWinRate := float64(player.Stats.ImpostorWins) / float64(player.Stats.NumImpostorGames) * 100
+		impostorWinRateString := fmt.Sprintf("%.2f", impostorWinRate)
+		msg += "- Impostor wins: " + strconv.Itoa(player.Stats.ImpostorWins) + " / " + strconv.Itoa(player.Stats.NumImpostorGames) + " "
+		if player.Stats.NumImpostorGames > 0 {
+			msg += "(" + impostorWinRateString + "%)"
 		}
 		msg += "\n"
 

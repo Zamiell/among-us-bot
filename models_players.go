@@ -16,8 +16,8 @@ func (*Players) Get(discordID string) (bool, *Player, error) {
 			total_games,
 			num_crew_games,
 			crew_wins,
-			num_imposter_games,
-			imposter_wins
+			num_impostor_games,
+			impostor_wins
 		FROM players
 		WHERE discord_id = ?
 	`, discordID).Scan(
@@ -27,8 +27,8 @@ func (*Players) Get(discordID string) (bool, *Player, error) {
 		&player.Stats.TotalGames,
 		&player.Stats.NumCrewGames,
 		&player.Stats.CrewWins,
-		&player.Stats.NumImposterGames,
-		&player.Stats.ImposterWins,
+		&player.Stats.NumImpostorGames,
+		&player.Stats.ImpostorWins,
 	); err == sql.ErrNoRows {
 		return false, &player, nil
 	} else if err != nil {
@@ -67,15 +67,15 @@ func (*Players) UpdateStats(player *Player) error {
 				total_games = ?,
 				num_crew_games = ?,
 				crew_wins = ?,
-				num_imposter_games = ?,
-				imposter_wins = ?
+				num_impostor_games = ?,
+				impostor_wins = ?
 			WHERE discord_id = ?
 		`,
 		player.Stats.TotalGames,
 		player.Stats.NumCrewGames,
 		player.Stats.CrewWins,
-		player.Stats.NumImposterGames,
-		player.Stats.ImposterWins,
+		player.Stats.NumImpostorGames,
+		player.Stats.ImpostorWins,
 		player.DiscordID,
 	)
 	return err

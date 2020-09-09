@@ -18,8 +18,8 @@ func (*PlayerList) GetAll() ([]*Player, error) {
 			players.total_games,
 			players.num_crew_games,
 			players.crew_wins,
-			players.num_imposter_games,
-			players.imposter_wins,
+			players.num_impostor_games,
+			players.impostor_wins,
 			player_list.playing
 		FROM player_list
 		JOIN players ON players.id = player_list.player_id
@@ -40,8 +40,8 @@ func (*PlayerList) GetAll() ([]*Player, error) {
 			&player.Stats.TotalGames,
 			&player.Stats.NumCrewGames,
 			&player.Stats.CrewWins,
-			&player.Stats.NumImposterGames,
-			&player.Stats.ImposterWins,
+			&player.Stats.NumImpostorGames,
+			&player.Stats.ImpostorWins,
 			&player.Playing,
 		); err != nil {
 			return nil, err

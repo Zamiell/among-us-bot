@@ -6,8 +6,8 @@ CREATE TABLE players (
     total_games         INTEGER  NOT NULL     DEFAULT 0,
     num_crew_games      INTEGER  NOT NULL     DEFAULT 0,
     crew_wins           INTEGER  NOT NULL     DEFAULT 0,
-    num_imposter_games  INTEGER  NOT NULL     DEFAULT 0,
-    imposter_wins       INTEGER  NOT NULL     DEFAULT 0
+    num_impostor_games  INTEGER  NOT NULL     DEFAULT 0,
+    impostor_wins       INTEGER  NOT NULL     DEFAULT 0
 );
 
 DROP TABLE IF EXISTS player_list;

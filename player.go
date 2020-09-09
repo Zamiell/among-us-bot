@@ -12,8 +12,8 @@ type Stats struct {
 	TotalGames       int
 	NumCrewGames     int
 	CrewWins         int
-	NumImposterGames int
-	ImposterWins     int
+	NumImpostorGames int
+	ImpostorWins     int
 }
 
 func (p *Player) Mention() string {
@@ -35,9 +35,9 @@ func (p *Player) UpdateStats(crew bool, win bool) error {
 			p.Stats.CrewWins++
 		}
 	} else {
-		p.Stats.NumImposterGames++
+		p.Stats.NumImpostorGames++
 		if win {
-			p.Stats.ImposterWins++
+			p.Stats.ImpostorWins++
 		}
 	}
 
