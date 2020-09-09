@@ -18,9 +18,9 @@ func commandHelp(command string, args []string, m *discordgo.MessageCreate) {
 	msg += "```\n"
 	msg += "Stats commands:\n"
 	msg += "```\n"
-	msg += "/win [impostor1] [impostor2]    Report a win for the crew members / a loss for the impostors.\n"
-	msg += "/loss [impostor1] [impostor2]   Report a loss for the crew members / a win for the impostors.\n"
-	msg += "/stats                          See your statistics."
+	msg += "/crew [impostor1] [impostor2]       Report a win for the crew members / a loss for the impostors.\n"
+	msg += "/imposter [impostor1] [impostor2]   Report a loss for the crew members / a win for the impostors.\n"
+	msg += "/stats                              See your statistics."
 	msg += "```"
 	discordSend(m.ChannelID, msg)
 }
