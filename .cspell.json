@@ -1,0 +1,40 @@
+{
+    "version": "0.1",
+    "language": "en",
+    "dictionaries": [
+        "en_US",
+        "companies",
+        "softwareTerms",
+        "html"
+    ],
+    "words": [
+        "bwmarrin",
+        "discordgo",
+        "funlen",
+        "gochecknoglobals",
+        "gocognit",
+        "goconst",
+        "gocritic",
+        "gocyclo",
+        "godotenv",
+        "goerr",
+        "gofmt",
+        "goimports",
+        "golint",
+        "gomnd",
+        "govet",
+        "joho",
+        "mattn",
+        "nestif",
+        "nlreturn",
+        "nolint",
+        "outdent",
+        "sqlite",
+        "structs",
+        "supervisorctl",
+        "unexported",
+        "unnext",
+        "unparam",
+        "zamiell"
+    ]
+}
