@@ -26,7 +26,9 @@ func commandInit() {
 	commandMap["crew"] = commandWin
 	commandMap["town"] = commandWin
 	commandMap["impostor"] = commandWin
+	commandMap["impostors"] = commandWin
 	commandMap["imposter"] = commandWin
+	commandMap["imposters"] = commandWin
 	commandMap["mafia"] = commandWin
 	commandMap["stats"] = commandModifyPlayerList
 }
