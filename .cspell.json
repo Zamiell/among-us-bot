@@ -25,6 +25,7 @@
         "govet",
         "joho",
         "mattn",
+        "mkdir",
         "nestif",
         "nlreturn",
         "nolint",
