@@ -90,7 +90,6 @@ func main() {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
 
-	if err := logger.Sync(); err != nil {
-		log.Fatal("Failed to flush buffered log entries:", err)
-	}
+	// Flush the logging buffer (we don't care if this fails)
+	logger.Sync() // nolint: errcheck
 }
