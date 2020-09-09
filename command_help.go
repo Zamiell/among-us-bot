@@ -25,6 +25,10 @@ func commandHelp(command string, args []string, m *discordgo.MessageCreate) {
 	msg += "/crew [impostor1] [impostor2]        Report a win for the crew members / a loss for the impostors.\n"
 	msg += "/imposters [impostor1] [impostor2]   Report a loss for the crew members / a win for the impostors.\n"
 	msg += "/stats                               See your statistics."
+	msg += "```\n"
+	msg += "Info commands:\n"
+	msg += "```\n"
+	msg += "/vpn   Show the guide for how to connect to the private Among Us server."
 	msg += "```"
 	discordSend(m.ChannelID, msg)
 }
