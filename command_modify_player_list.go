@@ -135,20 +135,27 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 			return
 		}
 	} else if command == "stats" {
-		msg = "Stats for " + player.Username + ":\n"
-		msg += "- Total games: **" + strconv.Itoa(player.Stats.TotalGames) + "**\n"
+		msg = "Stats for **" + player.Username + "**:\n"
+		msg += "```\n"
+		msg += "- Total games:   " + strconv.Itoa(player.Stats.TotalGames) + "\n"
 
 		crewWinRate := float64(player.Stats.CrewWins) / float64(player.Stats.NumCrewGames) * 100
 		crewWinRateString := fmt.Sprintf("%.2f", crewWinRate)
-		msg += "- Crew wins: " + strconv.Itoa(player.Stats.CrewWins) + " / " + strconv.Itoa(player.Stats.NumCrewGames) + " "
-		msg += "(" + crewWinRateString + "%)\n"
+		msg += "- Crew wins:     " + strconv.Itoa(player.Stats.CrewWins) + " / " + strconv.Itoa(player.Stats.NumCrewGames) + " "
+		if player.Stats.NumCrewGames > 0 {
+			msg += "(" + crewWinRateString + "%)"
+		}
+		msg += "\n"
 
 		imposterWinRate := float64(player.Stats.ImposterWins) / float64(player.Stats.NumImposterGames) * 100
 		imposterWinRateString := fmt.Sprintf("%.2f", imposterWinRate)
 		msg += "- Imposter wins: " + strconv.Itoa(player.Stats.ImposterWins) + " / " + strconv.Itoa(player.Stats.NumImposterGames) + " "
-		msg += "(" + imposterWinRateString + "%)\n"
+		if player.Stats.NumImposterGames > 0 {
+			msg += "(" + imposterWinRateString + "%)"
+		}
+		msg += "\n"
 
-		msg += "- Total games: " + strconv.Itoa(player.Stats.TotalGames) + "\n"
+		msg += "```"
 		discordSend(m.ChannelID, msg)
 		return
 	}
