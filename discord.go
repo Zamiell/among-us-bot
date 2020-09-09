@@ -97,7 +97,7 @@ func discordMessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if ok {
 		commandFunction(command, args, m)
 	} else {
-		discordSend("That is not a valid command.", m.ChannelID)
+		discordSend(m.ChannelID, "That is not a valid command.")
 	}
 }
 
