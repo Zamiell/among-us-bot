@@ -4,6 +4,9 @@ database.sqlite3
 # Secrets
 .env
 
+# The compiled binary
+among-us-bot
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
