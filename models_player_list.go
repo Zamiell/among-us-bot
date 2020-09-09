@@ -16,7 +16,9 @@ func (*PlayerList) GetAll() ([]*Player, error) {
 			players.username,
 			players.discord_id,
 			players.total_games,
+			players.num_crew_games,
 			players.crew_wins,
+			players.num_imposter_games,
 			players.imposter_wins,
 			player_list.playing
 		FROM player_list
@@ -36,7 +38,9 @@ func (*PlayerList) GetAll() ([]*Player, error) {
 			&player.Username,
 			&player.DiscordID,
 			&player.Stats.TotalGames,
+			&player.Stats.NumCrewGames,
 			&player.Stats.CrewWins,
+			&player.Stats.NumImposterGames,
 			&player.Stats.ImposterWins,
 			&player.Playing,
 		); err != nil {

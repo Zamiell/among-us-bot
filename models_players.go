@@ -14,7 +14,9 @@ func (*Players) Get(discordID string) (bool, *Player, error) {
 			username,
 			discord_id,
 			total_games,
+			num_crew_games,
 			crew_wins,
+			num_imposter_games,
 			imposter_wins
 		FROM players
 		WHERE discord_id = ?
@@ -23,7 +25,9 @@ func (*Players) Get(discordID string) (bool, *Player, error) {
 		&player.Username,
 		&player.DiscordID,
 		&player.Stats.TotalGames,
+		&player.Stats.NumCrewGames,
 		&player.Stats.CrewWins,
+		&player.Stats.NumImposterGames,
 		&player.Stats.ImposterWins,
 	); err == sql.ErrNoRows {
 		return false, &player, nil
@@ -53,4 +57,26 @@ func (*Players) Insert(player *Player) (int64, error) {
 	}
 
 	return id, nil
+}
+
+func (*Players) UpdateStats(player *Player) error {
+	_, err := db.Exec(
+		`
+			UPDATE players
+			SET
+				total_games = ?,
+				num_crew_games = ?,
+				crew_wins = ?,
+				num_imposter_games = ?,
+				imposter_wins = ?
+			WHERE discord_id = ?
+		`,
+		player.Stats.TotalGames,
+		player.Stats.NumCrewGames,
+		player.Stats.CrewWins,
+		player.Stats.NumImposterGames,
+		player.Stats.ImposterWins,
+		player.DiscordID,
+	)
+	return err
 }

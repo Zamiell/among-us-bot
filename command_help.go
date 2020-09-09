@@ -6,7 +6,7 @@ import (
 
 // /help - Display a list of all commands
 func commandHelp(command string, args []string, m *discordgo.MessageCreate) {
-	msg := "The following commands are supported:\n"
+	msg := "List commands:\n"
 	msg += "```\n"
 	msg += "/list         Display a list of the current active players and the current waiting players.\n"
 	msg += "/next         Add yourself to the waiting list.\n"
@@ -15,6 +15,12 @@ func commandHelp(command string, args []string, m *discordgo.MessageCreate) {
 	msg += "/notplaying   Move yourself from the playing list to the waiting list.\n"
 	msg += "/ping         Send a Discord ping to the next person on the waiting list.\n"
 	msg += "/clear        Remove all players from the playing list and waiting list.\n"
+	msg += "```\n"
+	msg += "Stats commands:\n"
+	msg += "```\n"
+	msg += "/win [imposter1] [imposter2]    Report a win for the crew members / a loss for the imposters.\n"
+	msg += "/loss [imposter1] [imposter2]   Report a loss for the crew members / a win for the imposters.\n"
+	msg += "/stats                          See your statistics."
 	msg += "```"
 	discordSend(m.ChannelID, msg)
 }

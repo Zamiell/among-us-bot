@@ -5,24 +5,6 @@ import (
 	"strconv"
 )
 
-type Player struct {
-	ID        int64
-	Username  string
-	DiscordID string
-	Playing   bool
-	Stats     Stats
-}
-
-type Stats struct {
-	TotalGames   int
-	CrewWins     int
-	ImposterWins int
-}
-
-func (p *Player) Mention() string {
-	return "<@" + p.DiscordID + ">"
-}
-
 // For storing the players who are waiting for the next game to start
 var playerList = make([]*Player, 0)
 

@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"regexp"
+	"strconv"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -12,6 +14,7 @@ var mentionRegExp = regexp.MustCompile(`<@!*(\d+?)>`)
 // /playing - Mark yourself as a player in the active game
 // /remove - Remove yourself from the playing list / waiting list
 // /notplaying - Move yourself from the playing list to the waiting list
+// /stats - See your statistics
 func commandModifyPlayerList(command string, args []string, m *discordgo.MessageCreate) {
 	// Get the target player
 	// If no arguments were provided, then the target is the person typing out the command
@@ -22,7 +25,7 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 	} else {
 		match := mentionRegExp.FindStringSubmatch(args[0])
 		if match == nil || len(match) <= 1 {
-			discordSend(m.ChannelID, "\""+discordID+"\" is not a valid Discord user.")
+			discordSend(m.ChannelID, "\""+args[0]+"\" is not a valid Discord user.")
 			return
 		}
 		discordID = match[1]
@@ -36,7 +39,7 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 		member = v
 	}
 
-	// This person wants to be added or removed from the waiting list
+	// Get this player from the database
 	var exists bool
 	var player *Player
 	if v1, v2, err := models.Players.Get(discordID); err != nil {
@@ -90,20 +93,18 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 			return
 		}
 
-		player.Playing = true
-
-		if index != -1 {
-			if err := models.PlayerList.SetPlaying(player); err != nil {
-				logger.Error("Failed to update the status of \""+player.Username+"\" in the player list:", err)
-				discordSend(m.ChannelID, ErrorMsg)
-				return
-			}
-		} else {
+		if index == -1 {
 			if err := playerListAdd(player); err != nil {
 				logger.Error("Failed to add \""+player.Username+"\" to the player list:", err)
 				discordSend(m.ChannelID, ErrorMsg)
 				return
 			}
+		}
+
+		if err := player.SetPlaying(true); err != nil {
+			logger.Error("Failed to update the status of \""+player.Username+"\" in the player list:", err)
+			discordSend(m.ChannelID, ErrorMsg)
+			return
 		}
 	} else if command == "remove" || command == "delete" || command == "unnext" {
 		if index == -1 {
@@ -128,12 +129,28 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 			return
 		}
 
-		player.Playing = false
-		if err := models.PlayerList.SetPlaying(player); err != nil {
+		if err := player.SetPlaying(false); err != nil {
 			logger.Error("Failed to update the status of \""+player.Username+"\" in the player list:", err)
 			discordSend(m.ChannelID, ErrorMsg)
 			return
 		}
+	} else if command == "stats" {
+		msg = "Stats for " + player.Username + ":\n"
+		msg += "- Total games: **" + strconv.Itoa(player.Stats.TotalGames) + "**\n"
+
+		crewWinRate := float64(player.Stats.CrewWins) / float64(player.Stats.NumCrewGames) * 100
+		crewWinRateString := fmt.Sprintf("%.2f", crewWinRate)
+		msg += "- Crew wins: " + strconv.Itoa(player.Stats.CrewWins) + " / " + strconv.Itoa(player.Stats.NumCrewGames) + " "
+		msg += "(" + crewWinRateString + "%)\n"
+
+		imposterWinRate := float64(player.Stats.ImposterWins) / float64(player.Stats.NumImposterGames) * 100
+		imposterWinRateString := fmt.Sprintf("%.2f", imposterWinRate)
+		msg += "- Imposter wins: " + strconv.Itoa(player.Stats.ImposterWins) + " / " + strconv.Itoa(player.Stats.NumImposterGames) + " "
+		msg += "(" + imposterWinRateString + "%)\n"
+
+		msg += "- Total games: " + strconv.Itoa(player.Stats.TotalGames) + "\n"
+		discordSend(m.ChannelID, msg)
+		return
 	}
 
 	msg += playerListGetSummary()

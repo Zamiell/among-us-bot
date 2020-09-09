@@ -23,4 +23,7 @@ func commandInit() {
 	commandMap["clear"] = commandClear
 	commandMap["clearall"] = commandClear
 	commandMap["deleteall"] = commandClear
+	commandMap["win"] = commandWinLoss
+	commandMap["loss"] = commandWinLoss
+	commandMap["stats"] = commandModifyPlayerList
 }
