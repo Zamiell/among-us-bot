@@ -15,6 +15,7 @@ func commandInit() {
 	commandMap["waiting"] = commandModifyPlayerList // Synonym for "/next"
 	commandMap["playing"] = commandModifyPlayerList
 	commandMap["remove"] = commandModifyPlayerList
+	commandMap["leave"] = commandModifyPlayerList  // Synonym for /remove"
 	commandMap["delete"] = commandModifyPlayerList // Synonym for /remove"
 	commandMap["unnext"] = commandModifyPlayerList // Synonym for /remove"
 	commandMap["notplaying"] = commandModifyPlayerList

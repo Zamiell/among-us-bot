@@ -106,7 +106,11 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 			discordSend(m.ChannelID, ErrorMsg)
 			return
 		}
-	} else if command == "remove" || command == "delete" || command == "unnext" {
+	} else if command == "remove" ||
+		command == "leave" ||
+		command == "delete" ||
+		command == "unnext" {
+
 		if index == -1 {
 			discordSend(m.ChannelID, player.Username+" is not on the playing list / waiting list, so there is no need to perform this command.")
 			return
