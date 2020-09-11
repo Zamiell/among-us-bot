@@ -30,6 +30,7 @@ func commandInit() {
 	commandMap["impostors"] = commandWin
 	commandMap["imposter"] = commandWin
 	commandMap["imposters"] = commandWin
+	commandMap["imp"] = commandWin
 	commandMap["mafia"] = commandWin
 	commandMap["stats"] = commandModifyPlayerList
 	commandMap["vpn"] = commandVPN
