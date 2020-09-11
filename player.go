@@ -44,3 +44,32 @@ func (p *Player) UpdateStats(crew bool, win bool) error {
 	err := models.Players.UpdateStats(p)
 	return err
 }
+
+func (p *Player) AdjustWin(positive bool, crew bool) error {
+	if positive {
+		p.Stats.TotalGames++
+	} else {
+		p.Stats.TotalGames--
+	}
+
+	if crew {
+		if positive {
+			p.Stats.NumCrewGames++
+			p.Stats.CrewWins++
+		} else {
+			p.Stats.NumCrewGames--
+			p.Stats.CrewWins--
+		}
+	} else {
+		if positive {
+			p.Stats.NumImpostorGames++
+			p.Stats.ImpostorWins++
+		} else {
+			p.Stats.NumImpostorGames--
+			p.Stats.ImpostorWins--
+		}
+	}
+
+	err := models.Players.UpdateStats(p)
+	return err
+}
