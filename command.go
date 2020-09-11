@@ -19,6 +19,7 @@ func commandInit() {
 	commandMap["delete"] = commandModifyPlayerList // Synonym for /remove"
 	commandMap["unnext"] = commandModifyPlayerList // Synonym for /remove"
 	commandMap["notplaying"] = commandModifyPlayerList
+	commandMap["stopplaying"] = commandModifyPlayerList // Synonym for /notplaying"
 	commandMap["ping"] = commandPing
 	commandMap["pingnext"] = commandPing
 	commandMap["clear"] = commandClear

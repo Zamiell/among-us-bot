@@ -132,7 +132,7 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 				discordSend(m.ChannelID, ErrorMsg)
 				return
 			}
-		} else if command == "notplaying" {
+		} else if command == "notplaying" || command == "stopplaying" {
 			if index != -1 && !player.Playing {
 				discordSend(m.ChannelID, player.Username+" is already on the waiting list, so there is no need to perform this command.")
 				return
