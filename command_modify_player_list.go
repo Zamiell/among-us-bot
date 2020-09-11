@@ -186,20 +186,34 @@ func commandModifyPlayerList(command string, args []string, m *discordgo.Message
 				return
 			}
 			discordSend(m.ChannelID, "Removed an impostor win from: "+player.Username)
-		} else if command == "minuscrew" || command == "minustown" {
+		} else if command == "minuscrew" ||
+			command == "minustown" ||
+			command == "crewminus" ||
+			command == "townminus" {
+
 			if err := player.AdjustWin(false, true); err != nil {
 				logger.Error("Failed to minus a crew win for \""+player.Username+"\":", err)
 				discordSend(m.ChannelID, ErrorMsg)
 				return
 			}
 			discordSend(m.ChannelID, "Removed a crew win from: "+player.Username)
-		} else if command == "minusimp" || command == "minusimpostor" || command == "minusimposter" || command == "minusmafia" {
+			return
+		} else if command == "minusimp" ||
+			command == "minusimpostor" ||
+			command == "minusimposter" ||
+			command == "minusmafia" ||
+			command == "impminus" ||
+			command == "impostorminus" ||
+			command == "imposterminus" ||
+			command == "mafiaminus" {
+
 			if err := player.AdjustWin(false, false); err != nil {
 				logger.Error("Failed to minus a crew win for \""+player.Username+"\":", err)
 				discordSend(m.ChannelID, ErrorMsg)
 				return
 			}
 			discordSend(m.ChannelID, "Removed an impostor win from: "+player.Username)
+			return
 		}
 	}
 

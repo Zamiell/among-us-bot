@@ -37,6 +37,8 @@ func commandInit() {
 	commandMap["stats"] = commandModifyPlayerList
 	commandMap["minuscrew"] = commandModifyPlayerList
 	commandMap["minustown"] = commandModifyPlayerList // Synonym for /minuscrew"
+	commandMap["crewminus"] = commandModifyPlayerList // Synonym for /minuscrew"
+	commandMap["townminus"] = commandModifyPlayerList // Synonym for /minuscrew"
 	commandMap["minusimp"] = commandModifyPlayerList
 	commandMap["minusimpostor"] = commandModifyPlayerList // Synonym for /minusimp"
 	commandMap["minusimposter"] = commandModifyPlayerList // Synonym for /minusimp"
