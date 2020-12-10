@@ -15,7 +15,7 @@ A Discord bot that helps to keep track of the players in an ongoing game of <a h
   * Enter in the information for the bot.
 * `sqlite3 database.sqlite3 < ./install/database_schema.sql`
 
-# Run as a Service
+## Run as a Service
 
 * `cp ./install/supervisor/among-us-bot.conf /etc/supervisor/conf.d/among-us-bot.conf`
 * `supervisorctl reread`
